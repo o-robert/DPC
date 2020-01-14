@@ -25,6 +25,12 @@ namespace DPC.Controllers
             var applicationDbContext = _context.Payments.Include(p => p.Trainee);
             return View(await applicationDbContext.ToListAsync());
         }
+        public ActionResult PaymentListing(int id)
+        {
+            var payments = _context.Payments.Where(m => m.TraineeId == id).ToList();
+            
+            return View(payments);
+        }
 
         // GET: Payments/Details/5
         public async Task<IActionResult> Details(int? id)

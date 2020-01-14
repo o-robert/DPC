@@ -99,7 +99,6 @@ namespace DPC.Controllers
                 try
                 {
                     _context.Update(trainee);
-                    trainee.DateAdded = DateTime.Now;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -151,5 +150,7 @@ namespace DPC.Controllers
         {
             return _context.Trainees.Any(e => e.TraineeId == id);
         }
+
+      
     }
 }

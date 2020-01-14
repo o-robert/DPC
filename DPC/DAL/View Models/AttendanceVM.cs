@@ -1,14 +1,13 @@
-﻿using System;
+﻿using DPC.Models.Entities;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DPC.Models.Entities
+namespace DPC.DAL.View_Models
 {
-    public class Attendance
+    public class AttendanceVM
     {
-        [Key]
         public int AttendanceId { get; set; }
         public int TraineeId { get; set; }
         public virtual Trainee Trainee { get; set; }
@@ -23,14 +22,5 @@ namespace DPC.Models.Entities
         public Status September { get; set; }
         public Status October { get; set; }
         public Status November { get; set; }
-    }
-
-    public enum Status
-    {
-        Present,
-        Absent,
-        Late,
-        Apology,
-        Withdrawn
     }
 }

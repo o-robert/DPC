@@ -189,6 +189,7 @@ namespace DPC.DAL
                 trainee.Deanery = trainee.Deanery;
                 trainee.Parish = trainee.Parish;
                 trainee.Pathway = trainee.Pathway;
+                //DateAdded = trainee.DateAdded
             }
             context.SaveChanges();
             return "success";
