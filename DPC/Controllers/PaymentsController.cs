@@ -27,7 +27,7 @@ namespace DPC.Controllers
         }
         public ActionResult PaymentListing(int id)
         {
-            var payments = _context.Payments.Where(m => m.TraineeId == id).ToList();
+            var payments = _context.Payments.Where(m => m.TraineeId == id).Include(p => p.Trainee).ToList();
             
             return View(payments);
         }
@@ -42,7 +42,7 @@ namespace DPC.Controllers
 
             var payment = await _context.Payments
                 .Include(p => p.Trainee)
-                .FirstOrDefaultAsync(m => m.TraineeId == id);
+                .FirstOrDefaultAsync(m => m.PaymentId == id);
             if (payment == null)
             {
                 return NotFound();
@@ -52,9 +52,15 @@ namespace DPC.Controllers
         }
 
         // GET: Payments/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            ViewData["TraineeId"] = new SelectList(_context.Trainees, "TraineeId", "FirstName");
+            var trainee = _context.Trainees.FirstOrDefault(t => t.TraineeId == id);
+            if (trainee != null)
+            {
+                ViewData["TraineeId"] =trainee.TraineeId;
+                ViewData["TraineeName"] = $"{trainee.FirstName} {trainee.LastName}";
+            }
+            
             return View();
         }
 
