@@ -36,7 +36,7 @@ namespace DPC.Controllers
 
             var payment = await _context.Payments
                 .Include(p => p.Trainee)
-                .FirstOrDefaultAsync(m => m.PaymentId == id);
+                .FirstOrDefaultAsync(m => m.TraineeId == id);
             if (payment == null)
             {
                 return NotFound();

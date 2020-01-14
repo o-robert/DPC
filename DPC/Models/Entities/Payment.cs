@@ -10,7 +10,6 @@ namespace DPC.Models.Entities
     {
         [Key]
         public int PaymentId { get; set; }
-        [Required]
         public virtual Trainee Trainee { get; set; }
         public int TraineeId { get; set; }
         public DateTime PaymentDate { get; set; }

@@ -84,6 +84,21 @@ namespace DPC.DAL
             };
             return model;
         }
+        
+        public PaymentVM GetPaymentByTraineeID(int traineeId)
+        {
+            Payment payment = context.Payments.Where(f => f.TraineeId == traineeId).FirstOrDefault();
+            PaymentVM model = new PaymentVM
+            {
+                PaymentId = payment.PaymentId,
+                TraineeId = payment.TraineeId,
+                PaymentDate = payment.PaymentDate,
+                AmountPaid = payment.AmountPaid,
+                PaidTo = payment.PaidTo,
+                PaymentDescription = payment.PaymentDescription
+            };
+            return model;
+        }
 
         public PaymentVM GetPaymentByName(string name)
         {

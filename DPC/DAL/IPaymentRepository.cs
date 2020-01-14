@@ -11,6 +11,7 @@ namespace DPC.DAL
     {
         IEnumerable<PaymentVM> GetPayments();
         PaymentVM GetPaymentByID(int paymentId);
+        PaymentVM GetPaymentByTraineeID(int traineeId);
         IEnumerable<PaymentVM> GetPaymentByDeanery(Deanery deanery);
         IEnumerable<PaymentVM> GetPaymentByParish(string parish);
         PaymentVM GetPaymentByName(string name);
