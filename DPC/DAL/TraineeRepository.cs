@@ -17,21 +17,36 @@ namespace DPC.DAL
         }
         public string AddTrainee(TraineeVM vm)
         {
-            Trainee newTrainee = new Trainee
+            try
             {
-                TraineeId = vm.TraineeId,
-                FirstName = vm.FirstName,
-                LastName = vm.LastName,
-                MiddleName = vm.MiddleName,
-                PhoneNumber = vm.PhoneNumber,
-                Deanery = vm.Deanery,
-                Parish = vm.Parish,
-                Pathway = vm.Pathway,
-                DateAdded = DateTime.Now
-            };
-            context.Trainees.Add(newTrainee);
-            context.SaveChanges();
-            return "success";
+                var chkTrainee = context.Trainees.Where(f => f.FirstName == vm.FirstName && f.LastName == vm.LastName && f.Deanery == vm.Deanery).FirstOrDefault();
+                if (chkTrainee == null)
+                {
+                    Trainee newTrainee = new Trainee
+                    {
+                        TraineeId = vm.TraineeId,
+                        FirstName = vm.FirstName,
+                        LastName = vm.LastName,
+                        MiddleName = vm.MiddleName,
+                        PhoneNumber = vm.PhoneNumber,
+                        Deanery = vm.Deanery,
+                        Parish = vm.Parish,
+                        Pathway = vm.Pathway,
+                        DateAdded = DateTime.Now
+                    };
+                    context.Trainees.Add(newTrainee);
+                    context.SaveChanges();
+                    return "success";
+                }
+                else
+                {
+                    return "This trainee already exists";
+                }
+            }
+            catch (Exception ex)
+            {
+                return (ex.Message);
+            }
         }
 
         public string DeleteTrainee(int TraineeId)

@@ -15,20 +15,41 @@ namespace DPC.DAL
         {
             this.context = context;
         }
+
+        //public string Reference()
+        //{
+        //    string txt = "DPC";
+        //    var currentYear = DateTime.Today.Year;
+
+        //    Random random = new Random();
+        //    var refNo = random.Next(11111, 99999);
+
+        //    string referenceNo = txt + "-" + currentYear + "-" + refNo;
+
+        //    return referenceNo;
+        //}
         public string AddPayment(PaymentVM vm)
         {
-            Payment newPayment = new Payment
+            try
             {
-                PaymentId = vm.PaymentId,
-                TraineeId = vm.Trainee.TraineeId,
-                PaymentDate = DateTime.Now,
-                AmountPaid = vm.AmountPaid,
-                PaidTo = vm.PaidTo,
-                PaymentDescription = vm.PaymentDescription
-            };
-            context.Payments.Add(newPayment);
-            context.SaveChanges();
-            return "success";
+                Payment newPayment = new Payment
+                {
+                    PaymentId = vm.PaymentId,
+                    TraineeId = vm.Trainee.TraineeId,
+                    PaymentDate = DateTime.Now,
+                    AmountPaid = vm.AmountPaid,
+                    PaidTo = vm.PaidTo,
+                    PaymentDescription = vm.PaymentDescription
+                    //PaymentReference = Reference()
+                };
+                context.Payments.Add(newPayment);
+                context.SaveChanges();
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string DeletePayment(int paymentId)
