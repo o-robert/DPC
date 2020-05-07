@@ -16,18 +16,19 @@ namespace DPC.DAL
             this.context = context;
         }
 
-        //public string Reference()
-        //{
-        //    string txt = "DPC";
-        //    var currentYear = DateTime.Today.Year;
+        public string Reference()
+        {
+            string txt = "DPC";
+            var currentYear = DateTime.Today.Year;
 
-        //    Random random = new Random();
-        //    var refNo = random.Next(11111, 99999);
+            Random random = new Random();
+            var refNo = random.Next(11111, 99999);
 
-        //    string referenceNo = txt + "-" + currentYear + "-" + refNo;
+            string referenceNo = txt + "-" + currentYear + "-" + refNo;
 
-        //    return referenceNo;
-        //}
+            return referenceNo;
+        }
+
         public string AddPayment(PaymentVM vm)
         {
             try
